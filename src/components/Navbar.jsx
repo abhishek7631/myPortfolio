@@ -32,7 +32,7 @@ export default function Navbar() {
     },
   ];
   return (
-    <div className="max-w-screen-2xl container h-16  mx-auto md:px-20 shadow-md fixed top-0 left-0 right-0">
+    <div className="max-w-screen-2xl container h-16  mx-auto md:px-20 shadow-md fixed top-0 left-0 right-0 bg-white">
       <div className="flex justify-between items-center h-16">
         <div className="flex space-x-2">
           <img src={pic} alt="" className="h-12 w-12 rounded-full" />
