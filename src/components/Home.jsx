@@ -36,11 +36,11 @@ function Home() {
             </div>
             <br />
             <p className="text-sm md:text-md text-justify">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Quisquam, recusandae consequatur. Accusamus sint libero eligendi
-              laborum fuga repudiandae? Asperiores tempore eos animi dolores
-              corrupti! Sint quos, mollitia architecto aliquam nesciunt, optio
-              cum delectus sit voluptatum aut ratione quaerat veniam aperiam!
+              MERN Stack Developer skilled in building responsive web
+              applications using MongoDB, Express.js, React, and Node.js. Strong
+              communicator with effective time management and problem-solving
+              abilities. Known for adaptability and teamwork in fast-paced
+              environments, delivering high-quality, scalable solutions.
             </p>
             <br />
             {/* Social Media Icons */}
