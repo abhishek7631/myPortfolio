@@ -1,6 +1,7 @@
 import React from "react";
 
 // import pic from "../../public/photo.avif";
+import profile_img from "../../public/profile_img";
 
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
@@ -93,11 +94,11 @@ function Home() {
             </div>
           </div>
           <div className="md:w-1/2 md:ml-48 md:mt-20 mt-8 order-1">
-            {/* <img
-              src={pic}
+            <img
+              src={profile_img}
               className="rounded-full md:w-[450px] md:h-[450px]"
               alt=""
-            /> */}
+            />
           </div>
         </div>
       </div>
