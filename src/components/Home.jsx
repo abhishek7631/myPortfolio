@@ -85,7 +85,7 @@ function Home() {
             {/* Download Resume Button */}
             <div className="text-center">
               <a
-                href="/path-to-Abhishek_Updated_Resume.pdf"
+                href="/Abhishek_Updated_Resume.pdf"
                 download="Abhishek_Updated_Resume.pdf"
                 className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
               >
