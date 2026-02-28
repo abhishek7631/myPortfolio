@@ -27,7 +27,9 @@ function Education() {
   return (
     <section id="education" className="py-20">
       <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Education</h2>
+        <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-100">
+          Education
+        </h2>
 
         <div className="space-y-6">
           {educationDetails.map((edu) => (
@@ -40,10 +42,10 @@ function Education() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-bold text-purple-300">
+                  <h3 className="text-xl font-bold text-gray-100">
                     {edu.degree}
                   </h3>
-                  <p className="text-sm text-gray-400">{edu.institution}</p>
+                  <p className="text-sm text-gray-300">{edu.institution}</p>
                 </div>
                 <div className="text-sm text-gray-500">{edu.duration}</div>
               </div>

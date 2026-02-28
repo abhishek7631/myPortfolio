@@ -64,18 +64,18 @@ function Experience() {
             <motion.div
               key={exp.id}
               variants={itemVariants}
-              className="group p-6 rounded-xl bg-slate-900/50 dark:bg-slate-900/80 border border-slate-700/30"
+              className="group p-6 rounded-xl bg-slate-900/60 dark:bg-slate-900/84 border border-slate-700/30"
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-xl font-bold text-pink-300 dark:text-pink-200">
+                  <h3 className="text-xl font-bold text-gray-100">
                     {exp.title}
                   </h3>
-                  <p className="text-sm text-gray-400">@ {exp.company}</p>
+                  <p className="text-sm text-gray-300">@ {exp.company}</p>
                 </div>
-                <div className="text-sm text-gray-500">{exp.duration}</div>
+                <div className="text-sm text-gray-400">{exp.duration}</div>
               </div>
-              <p className="mt-3 text-gray-400 text-sm leading-relaxed">
+              <p className="mt-3 text-gray-300 text-sm leading-relaxed">
                 {exp.description}
               </p>
             </motion.div>

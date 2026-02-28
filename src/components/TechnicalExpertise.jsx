@@ -58,7 +58,7 @@ function TechnicalExpertise() {
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-12"
+          className="text-4xl font-extrabold text-center mb-12 text-gray-100"
         >
           Technical Expertise
         </motion.h2>
@@ -70,19 +70,21 @@ function TechnicalExpertise() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative p-6 rounded-xl bg-gradient-to-br from-slate-900/60 to-slate-900/40 border border-slate-700/30 hover:shadow-xl transition-shadow duration-300"
+              className="relative p-6 rounded-xl bg-gradient-to-br from-slate-900/72 to-slate-900/56 border border-slate-700/40 hover:shadow-xl transition-shadow duration-300"
             >
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-lg bg-white/6 flex items-center justify-center text-2xl">
+                <div className="w-14 h-14 rounded-lg bg-white/10 flex items-center justify-center text-2xl">
                   {cat.icon}
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold">{cat.title}</h3>
-                  <div className="mt-2 flex flex-wrap gap-2">
+                  <h3 className="text-xl font-bold text-gray-100">
+                    {cat.title}
+                  </h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
                     {cat.skills.map((s, idx) => (
                       <span
                         key={idx}
-                        className="text-xs px-3 py-1 rounded-full bg-white/6 text-gray-200"
+                        className="text-sm px-3 py-1 rounded-full bg-white/8 text-gray-100"
                       >
                         {s}
                       </span>
