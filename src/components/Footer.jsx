@@ -29,7 +29,7 @@ function Footer() {
     },
     {
       icon: FaLinkedinIn,
-      url: "#",
+      url: "https://www.linkedin.com/in/abhishek7631/",
       label: "LinkedIn",
       color: "hover:text-blue-400",
     },

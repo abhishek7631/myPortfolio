@@ -24,9 +24,14 @@ function Contact() {
       message: data.message,
     };
     try {
-      await axios.post("https://getform.io/f/raeqjora", userInfo);
-      toast.success("Your message has been sent successfully!");
-      reset();
+      const res = await axios.post("/api/contact", userInfo);
+      if (res.data && res.data.ok) {
+        toast.success("Your message has been sent successfully!");
+        reset();
+      } else {
+        console.error("Mail endpoint response:", res.data);
+        toast.error("Failed to send message. Please try again.");
+      }
     } catch (error) {
       console.log(error);
       toast.error("Failed to send message. Please try again.");
@@ -37,19 +42,19 @@ function Contact() {
     {
       icon: MdEmail,
       title: "Email",
-      value: "your.email@example.com",
+      value: "abhishek.choudhary7631@gmail.com",
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: MdPhone,
       title: "Phone",
-      value: "+91 XXXXXXXXXX",
+      value: "+91 9576134807",
       color: "from-purple-500 to-pink-500",
     },
     {
       icon: MdLocationOn,
       title: "Location",
-      value: "India",
+      value: "New Delhi, India",
       color: "from-red-500 to-orange-500",
     },
   ];
