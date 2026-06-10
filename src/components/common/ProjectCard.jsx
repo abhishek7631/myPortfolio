@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
+import { buttonHover, cardHover } from "../../utils/motion";
 
 const MAX_VISIBLE_TAGS = 3;
 
@@ -9,12 +11,13 @@ function ProjectCard({ project, onViewDetails }) {
   const showImage = project.image && !imgError;
 
   return (
-    <article
+    <motion.article
+      {...cardHover}
       onClick={() => onViewDetails(project)}
       onKeyDown={(e) => e.key === "Enter" && onViewDetails(project)}
       role="button"
       tabIndex={0}
-      className="flex flex-col h-full rounded-2xl border border-gray-200 dark:border-slate-700/60 bg-white dark:bg-slate-900 overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+      className="flex flex-col h-full rounded-2xl border border-gray-200 dark:border-slate-700/60 bg-white dark:bg-slate-900 overflow-hidden shadow-md hover:shadow-2xl hover:border-sky-300/50 dark:hover:border-sky-600/40 transition-[box-shadow,border-color] duration-300 cursor-pointer"
     >
       <div className="relative h-48 sm:h-52 overflow-hidden shrink-0">
         {showImage ? (
@@ -73,19 +76,20 @@ function ProjectCard({ project, onViewDetails }) {
           )}
         </div>
 
-        <button
+        <motion.button
+          {...buttonHover}
           type="button"
           onClick={(e) => {
             e.stopPropagation();
             onViewDetails(project);
           }}
-          className="mt-5 w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white text-sm font-semibold transition-colors duration-300"
+          className="mt-5 w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-colors duration-300"
         >
           View details
           <FiArrowRight size={16} />
-        </button>
+        </motion.button>
       </div>
-    </article>
+    </motion.article>
   );
 }
 

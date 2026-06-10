@@ -7,6 +7,7 @@ import { HiSparkles } from "react-icons/hi2";
 import ProjectCard from "./common/ProjectCard";
 import ProjectGalleryCarousel from "./common/ProjectGalleryCarousel";
 import { projectAsset } from "../utils/projectAssets";
+import { buttonHover, iconHover } from "../utils/motion";
 
 const projectData = [
   {
@@ -283,13 +284,14 @@ function Projects() {
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 relative shadow-2xl"
             >
-              <button
+              <motion.button
+                {...iconHover}
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-10 p-2 rounded-lg bg-white/90 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors shadow-sm"
+                className="absolute top-4 right-4 z-10 p-2 rounded-lg bg-white/90 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 hover:shadow-md transition-colors shadow-sm"
                 aria-label="Close"
               >
                 <IoClose size={22} />
-              </button>
+              </motion.button>
 
               <div className="rounded-t-2xl overflow-hidden">
                 {getProjectImages(selectedProject).length > 0 ? (
@@ -336,17 +338,18 @@ function Projects() {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-gray-200 dark:border-slate-700">
-                  <a
+                  <motion.a
+                    {...buttonHover}
                     href={selectedProject.liveLink}
                     target={
                       selectedProject.liveLink !== "#" ? "_blank" : undefined
                     }
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-semibold transition-colors"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-semibold shadow-md hover:shadow-lg hover:shadow-sky-500/30 transition-colors"
                   >
                     <FiExternalLink size={18} />
                     Live Demo
-                  </a>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>

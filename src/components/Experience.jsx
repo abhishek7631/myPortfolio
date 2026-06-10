@@ -7,6 +7,7 @@ import {
   FaMapMarkerAlt,
   FaChevronRight,
 } from "react-icons/fa";
+import { cardHover } from "../utils/motion";
 
 const experienceDetails = [
   {
@@ -75,7 +76,10 @@ const cardVariants = {
 
 function ExperienceCard({ exp }) {
   return (
-    <article className="rounded-2xl border border-gray-200/80 dark:border-slate-700/50 bg-white/95 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+    <motion.article
+      {...cardHover}
+      className="rounded-2xl border border-gray-200/80 dark:border-slate-700/50 bg-white/95 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-md hover:shadow-xl hover:border-sky-300/40 dark:hover:border-sky-600/30 transition-[box-shadow,border-color] duration-300"
+    >
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-start gap-3 min-w-0">
           <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-slate-800 flex items-center justify-center shrink-0 text-gray-500 dark:text-gray-400">
@@ -140,7 +144,7 @@ function ExperienceCard({ exp }) {
           </span>
         ))}
       </div>
-    </article>
+    </motion.article>
   );
 }
 

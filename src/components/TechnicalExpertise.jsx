@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaServer, FaDatabase, FaGitAlt, FaLightbulb } from "react-icons/fa";
 import SkillProgressBar from "./common/SkillProgressBar";
+import { cardHover } from "../utils/motion";
 
 const categories = [
   {
@@ -75,7 +76,7 @@ const cardVariants = {
 };
 
 const cardBaseClass =
-  "flex flex-col w-full md:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] h-[32rem] rounded-2xl border border-gray-200/80 dark:border-slate-700/50 bg-white/90 dark:bg-slate-900/75 backdrop-blur-sm p-6 shadow-sm hover:shadow-md transition-shadow duration-300";
+  "flex flex-col w-full md:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] h-[32rem] rounded-2xl border border-gray-200/80 dark:border-slate-700/50 bg-white/90 dark:bg-slate-900/75 backdrop-blur-sm p-6 shadow-sm hover:shadow-xl hover:border-sky-300/40 dark:hover:border-sky-600/30 transition-[box-shadow,border-color] duration-300";
 
 function TechnicalExpertise() {
   return (
@@ -118,6 +119,7 @@ function TechnicalExpertise() {
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
               variants={cardVariants}
+              {...cardHover}
               className={cardBaseClass}
             >
               <div className="flex items-center gap-4 mb-6 shrink-0">

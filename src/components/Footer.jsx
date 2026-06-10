@@ -1,7 +1,9 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { iconHover } from "../utils/motion";
 
 const quickLinks = [
   { id: "home", text: "Home" },
@@ -50,16 +52,17 @@ function Footer() {
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
-                  <a
+                  <motion.a
                     key={social.label}
+                    {...iconHover}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-10 h-10 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-gray-400 hover:text-sky-400 hover:border-sky-500/50 transition-colors duration-300"
+                    className="w-10 h-10 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-gray-400 hover:text-sky-400 hover:border-sky-500/50 hover:shadow-md hover:shadow-sky-500/10 transition-colors duration-300"
                   >
                     <Icon size={18} />
-                  </a>
+                  </motion.a>
                 );
               })}
             </div>
@@ -75,7 +78,7 @@ function Footer() {
                     smooth
                     duration={500}
                     offset={-80}
-                    className="text-sm text-gray-400 hover:text-sky-400 cursor-pointer transition-colors duration-300"
+                    className="text-sm text-gray-400 hover:text-sky-400 hover:translate-x-1 cursor-pointer transition-all duration-300 inline-block"
                   >
                     {link.text}
                   </Link>

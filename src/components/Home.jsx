@@ -4,6 +4,7 @@ import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import { FiExternalLink } from "react-icons/fi";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { useOnScreen } from "../hooks/useOnScreen";
+import { buttonHover, iconHover, subtleHover } from "../utils/motion";
 
 const contactRow = [
   {
@@ -132,18 +133,23 @@ function Home() {
 
             if (item.href) {
               return (
-                <a
+                <motion.a
                   key={item.label}
+                  {...subtleHover}
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
                 >
                   {content}
-                </a>
+                </motion.a>
               );
             }
 
-            return <span key={item.label}>{content}</span>;
+            return (
+              <motion.span key={item.label} {...subtleHover}>
+                {content}
+              </motion.span>
+            );
           })}
         </motion.div>
 
@@ -156,29 +162,31 @@ function Home() {
           {socialLinks.map((social) => {
             if (social.isCode) {
               return (
-                <a
+                <motion.a
                   key={social.label}
+                  {...iconHover}
                   href={social.url}
                   aria-label={social.label}
-                  className="w-11 h-11 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-700 dark:text-gray-300 font-bold text-sm shadow-sm hover:shadow-md hover:border-sky-300 dark:hover:border-sky-600 transition-all duration-300"
+                  className="w-11 h-11 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-700 dark:text-gray-300 font-bold text-sm shadow-sm hover:shadow-lg hover:border-sky-300 dark:hover:border-sky-600 transition-all duration-300"
                 >
                   &lt;/&gt;
-                </a>
+                </motion.a>
               );
             }
 
             const Icon = social.icon;
             return (
-              <a
+              <motion.a
                 key={social.label}
+                {...iconHover}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="w-11 h-11 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300 shadow-sm hover:shadow-md hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-300 dark:hover:border-sky-600 transition-all duration-300"
+                className="w-11 h-11 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300 shadow-sm hover:shadow-lg hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-300 dark:hover:border-sky-600 transition-all duration-300"
               >
                 <Icon size={18} />
-              </a>
+              </motion.a>
             );
           })}
         </motion.div>
@@ -189,18 +197,20 @@ function Home() {
           transition={{ duration: 0.7, delay: 0.5 }}
           className="mt-10 flex flex-col sm:flex-row items-center gap-4"
         >
-          <a
+          <motion.a
+            {...buttonHover}
             href="#projects"
-            className="inline-flex items-center justify-center min-w-[180px] px-8 py-3.5 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-semibold shadow-md shadow-sky-500/25 transition-colors duration-300"
+            className="inline-flex items-center justify-center min-w-[180px] px-8 py-3.5 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-semibold shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/35 transition-colors duration-300"
           >
             View My Work
-          </a>
-          <a
+          </motion.a>
+          <motion.a
+            {...buttonHover}
             href="#contact"
-            className="inline-flex items-center justify-center min-w-[180px] px-8 py-3.5 rounded-full bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-semibold border border-gray-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300"
+            className="inline-flex items-center justify-center min-w-[180px] px-8 py-3.5 rounded-full bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-semibold border border-gray-200 dark:border-slate-700 shadow-sm hover:shadow-lg hover:border-sky-300 dark:hover:border-sky-600 transition-all duration-300"
           >
             Get In Touch
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </motion.section>

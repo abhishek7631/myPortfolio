@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { iconHover } from "../../utils/motion";
 
 function ProjectGalleryCarousel({ images, projectName }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,22 +38,24 @@ function ProjectGalleryCarousel({ images, projectName }) {
 
         {images.length > 1 && (
           <>
-            <button
+            <motion.button
+              {...iconHover}
               type="button"
               onClick={() => goTo(activeIndex - 1)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-900/90 text-gray-700 dark:text-gray-200 shadow-md flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 transition-colors"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-900/90 text-gray-700 dark:text-gray-200 shadow-md flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg transition-colors"
               aria-label="Previous image"
             >
               <FiChevronLeft size={20} />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              {...iconHover}
               type="button"
               onClick={() => goTo(activeIndex + 1)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-900/90 text-gray-700 dark:text-gray-200 shadow-md flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-900/90 text-gray-700 dark:text-gray-200 shadow-md flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg transition-colors"
               aria-label="Next image"
             >
               <FiChevronRight size={20} />
-            </button>
+            </motion.button>
           </>
         )}
       </div>
