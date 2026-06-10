@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { HiDownload } from "react-icons/hi";
 import { FaAward, FaMugHot, FaBuilding } from "react-icons/fa";
 import profile_img from "../../public/profile_img.jpg";
+import { buttonHover, subtleHover } from "../utils/motion";
 
 const stats = [
   {
@@ -76,10 +77,13 @@ function About() {
                 aria-hidden
                 className="absolute inset-0 rounded-full bg-gradient-to-br from-sky-200/40 to-violet-200/40 dark:from-sky-600/20 dark:to-violet-600/20 blur-2xl scale-110"
               />
-              <img
+              <motion.img
+                whileHover={{ scale: 1.04, rotate: 1 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 360, damping: 24 }}
                 src={profile_img}
                 alt="Abhishek Choudhary"
-                className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full object-cover shadow-xl border-4 border-white dark:border-slate-800"
+                className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full object-cover shadow-xl hover:shadow-2xl border-4 border-white dark:border-slate-800 transition-shadow duration-300 cursor-pointer"
               />
             </div>
           </motion.div>
@@ -118,7 +122,11 @@ function About() {
               {stats.map((stat) => {
                 const Icon = stat.icon;
                 return (
-                  <div key={stat.label} className="text-center sm:text-left">
+                  <motion.div
+                    key={stat.label}
+                    {...subtleHover}
+                    className="text-center sm:text-left p-3 rounded-xl hover:bg-sky-50/80 dark:hover:bg-sky-900/20 transition-colors duration-300"
+                  >
                     <div className="inline-flex w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-900/30 items-center justify-center text-sky-600 dark:text-sky-400 mb-2">
                       <Icon size={18} />
                     </div>
@@ -128,16 +136,15 @@ function About() {
                     <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-0.5">
                       {stat.label}
                     </p>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              {...buttonHover}
               onClick={handleResumeDownload}
-              className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-semibold shadow-md shadow-sky-500/25 transition-colors duration-300"
+              className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-semibold shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/35 transition-colors duration-300"
             >
               <HiDownload size={20} />
               Download Resume

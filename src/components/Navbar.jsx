@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 import { FiSun, FiMoon } from "react-icons/fi";
 import { Link } from "react-scroll";
+import { iconHover } from "../utils/motion";
 
 function Navbar({ dark, setDark }) {
   const [menu, setMenu] = useState(false);
@@ -27,7 +29,7 @@ function Navbar({ dark, setDark }) {
             offset={-88}
             className="font-bold text-xl sm:text-2xl tracking-tight bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent cursor-pointer shrink-0"
           >
-            Abhishek Choudhary
+            Abhishek Kumar Choudhary
           </Link>
 
           <div className="hidden lg:flex items-center gap-6">
@@ -49,30 +51,33 @@ function Navbar({ dark, setDark }) {
               ))}
             </ul>
 
-            <button
+            <motion.button
+              {...iconHover}
               onClick={() => setDark(!dark)}
-              className="w-11 h-11 rounded-xl border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:border-sky-300 dark:hover:border-sky-600 hover:text-sky-600 dark:hover:text-sky-400 transition-colors duration-300"
+              className="w-11 h-11 rounded-xl border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:border-sky-300 dark:hover:border-sky-600 hover:text-sky-600 dark:hover:text-sky-400 hover:shadow-md transition-colors duration-300"
               aria-label="toggle dark mode"
             >
               {dark ? <FiSun size={20} /> : <FiMoon size={20} />}
-            </button>
+            </motion.button>
           </div>
 
           <div className="flex lg:hidden items-center gap-3">
-            <button
+            <motion.button
+              {...iconHover}
               onClick={() => setDark(!dark)}
-              className="w-11 h-11 rounded-xl border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300"
+              className="w-11 h-11 rounded-xl border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:border-sky-300 dark:hover:border-sky-600"
               aria-label="toggle dark mode"
             >
               {dark ? <FiSun size={20} /> : <FiMoon size={20} />}
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              {...iconHover}
               onClick={() => setMenu(!menu)}
-              className="w-11 h-11 rounded-xl border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-700 dark:text-gray-200 hover:text-sky-600 transition-colors"
+              className="w-11 h-11 rounded-xl border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-700 dark:text-gray-200 hover:text-sky-600 hover:border-sky-300 dark:hover:border-sky-600 transition-colors"
               aria-label="toggle menu"
             >
               {menu ? <IoCloseSharp size={26} /> : <AiOutlineMenu size={26} />}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>

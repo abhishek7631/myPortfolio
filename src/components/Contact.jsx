@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { FaPaperPlane } from "react-icons/fa6";
+import { buttonHover, cardHover, iconHover } from "../utils/motion";
 
 const contactInfo = {
   email: "abhishek.choudhary7631@gmail.com",
@@ -51,7 +52,7 @@ const socialLinks = [
 ];
 
 const inputClass =
-  "w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40 focus:border-sky-400 transition";
+  "w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40 focus:border-sky-400 hover:border-sky-300/60 dark:hover:border-sky-600/40 transition-all duration-300";
 
 function Contact() {
   const {
@@ -142,7 +143,10 @@ function Contact() {
               {contactMethods.map((method) => {
                 const Icon = method.icon;
                 const content = (
-                  <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-gray-200/80 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <motion.div
+                    {...cardHover}
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-gray-200/80 dark:border-slate-700/50 shadow-sm hover:shadow-lg hover:border-sky-300/40 dark:hover:border-sky-600/30 transition-[box-shadow,border-color] duration-300"
+                  >
                     <div
                       className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${method.iconBg}`}
                     >
@@ -156,7 +160,7 @@ function Contact() {
                         {method.value}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
 
                 return method.href ? (
@@ -177,16 +181,17 @@ function Contact() {
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
                   return (
-                    <a
+                    <motion.a
                       key={social.label}
+                      {...iconHover}
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-300 dark:hover:border-sky-600 shadow-sm transition-colors duration-300"
+                      className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-300 dark:hover:border-sky-600 shadow-sm hover:shadow-md transition-colors duration-300"
                     >
                       <Icon size={18} />
-                    </a>
+                    </motion.a>
                   );
                 })}
               </div>
@@ -198,7 +203,12 @@ function Contact() {
             animate={visible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
             onSubmit={handleSubmit(onSubmit)}
-            className="rounded-2xl bg-white dark:bg-slate-900/80 border border-gray-200/80 dark:border-slate-700/50 shadow-md p-6 sm:p-8"
+            whileHover={{
+              y: -4,
+              boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+              transition: { type: "spring", stiffness: 360, damping: 24 },
+            }}
+            className="rounded-2xl bg-white dark:bg-slate-900/80 border border-gray-200/80 dark:border-slate-700/50 shadow-md hover:shadow-xl hover:border-sky-300/30 dark:hover:border-sky-600/20 p-6 sm:p-8 transition-[box-shadow,border-color] duration-300"
           >
             <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6">
               Send Message
@@ -281,10 +291,9 @@ function Contact() {
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              {...buttonHover}
               type="submit"
-              className="w-full mt-6 flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3.5 rounded-xl transition-colors duration-300 shadow-md shadow-sky-500/25"
+              className="w-full mt-6 flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3.5 rounded-xl transition-colors duration-300 shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/35"
             >
               <FaPaperPlane size={16} />
               Send Message
