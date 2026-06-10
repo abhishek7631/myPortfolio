@@ -4,20 +4,21 @@ export function useOnScreen(ref, rootMargin = "0px") {
   const [isVisible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!ref.current) return;
+    const element = ref.current;
+    if (!element) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          observer.unobserve(ref.current);
+          observer.unobserve(element);
         }
       },
       { rootMargin },
     );
-    observer.observe(ref.current);
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
+
+    observer.observe(element);
+    return () => observer.unobserve(element);
   }, [ref, rootMargin]);
 
   return isVisible;
