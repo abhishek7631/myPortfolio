@@ -33,16 +33,20 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post("/api/contact", async (req, res) => {
-  const { name, email, message } = req.body || {};
+  const { name, email, subject, message } = req.body || {};
   if (!name || !email || !message)
     return res.status(400).json({ error: "Missing fields" });
+
+  const mailSubject =
+    subject?.trim() ||
+    `Portfolio contact from ${name} <${email}>`;
 
   try {
     const info = await transporter.sendMail({
       from: `"Portfolio Contact" <${SMTP_USER}>`,
       to: DEST_EMAIL,
-      subject: `Portfolio contact from ${name} <${email}>`,
-      text: message,
+      subject: mailSubject,
+      text: `From: ${name} <${email}>\n\n${message}`,
       html: `<p><strong>${name} &lt;${email}&gt;</strong></p><div>${message}</div>`,
     });
 

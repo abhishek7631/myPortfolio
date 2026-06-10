@@ -13,7 +13,7 @@ const stars = Array.from({ length: starCount }).map(() => {
 
 export default function Starfield() {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-0 dark:opacity-100 transition-opacity duration-300">
       {stars.map((s, i) => (
         <motion.div
           key={i}
