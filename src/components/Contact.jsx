@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useOnScreen } from "../hooks/useOnScreen";
@@ -8,6 +7,7 @@ import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { FaPaperPlane } from "react-icons/fa6";
 import { buttonHover, cardHover, iconHover } from "../utils/motion";
+import { sendContactEmail } from "../utils/sendContactEmail";
 
 const contactInfo = {
   email: "abhishek.choudhary7631@gmail.com",
@@ -64,26 +64,28 @@ function Contact() {
 
   const ref = useRef();
   const visible = useOnScreen(ref);
+  const [isSending, setIsSending] = useState(false);
 
   const onSubmit = async (data) => {
-    const userInfo = {
-      name: data.name,
-      email: data.email,
-      subject: data.subject,
-      message: data.message,
-    };
+    setIsSending(true);
 
     try {
-      const res = await axios.post("/api/contact", userInfo);
-      if (res.data?.ok) {
-        toast.success("Your message has been sent successfully!");
-        reset();
-      } else {
-        toast.error("Failed to send message. Please try again.");
-      }
+      await sendContactEmail({
+        name: data.name,
+        email: data.email,
+        subject: data.subject,
+        message: data.message,
+      });
+
+      toast.success("Your message has been sent successfully!");
+      reset();
     } catch (error) {
       console.error(error);
-      toast.error("Failed to send message. Please try again.");
+      toast.error(
+        error.message || "Failed to send message. Please try again.",
+      );
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -291,12 +293,13 @@ function Contact() {
             </div>
 
             <motion.button
-              {...buttonHover}
+              {...(isSending ? {} : buttonHover)}
               type="submit"
-              className="w-full mt-6 flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3.5 rounded-xl transition-colors duration-300 shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/35"
+              disabled={isSending}
+              className="w-full mt-6 flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-600 disabled:bg-sky-400 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-xl transition-colors duration-300 shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/35"
             >
-              <FaPaperPlane size={16} />
-              Send Message
+              <FaPaperPlane size={16} className={isSending ? "animate-pulse" : ""} />
+              {isSending ? "Sending..." : "Send Message"}
             </motion.button>
           </motion.form>
         </div>

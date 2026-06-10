@@ -3,7 +3,7 @@ import { useOnScreen } from "../hooks/useOnScreen";
 import { motion } from "framer-motion";
 import { HiDownload } from "react-icons/hi";
 import { FaAward, FaMugHot, FaBuilding } from "react-icons/fa";
-import profile_img from "../../public/profile_img.jpg";
+import profile_img from "../assets/profile_img.jpg";
 import { buttonHover, subtleHover } from "../utils/motion";
 
 const stats = [
