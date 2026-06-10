@@ -9,6 +9,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Starfield from "./components/Starfield";
+import ScrollToTop from "./components/common/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
       <Toaster />
     </div>
   );

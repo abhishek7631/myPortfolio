@@ -5,6 +5,53 @@ import toast from "react-hot-toast";
 import { useOnScreen } from "../hooks/useOnScreen";
 import { motion } from "framer-motion";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa6";
+
+const contactInfo = {
+  email: "abhishek.choudhary7631@gmail.com",
+  phone: "+91 9576134807",
+  location: "Gurgaon, India",
+};
+
+const contactMethods = [
+  {
+    icon: MdEmail,
+    title: "Email",
+    value: contactInfo.email,
+    href: `mailto:${contactInfo.email}`,
+    iconBg: "bg-red-50 text-red-500 dark:bg-red-500/10 dark:text-red-400",
+  },
+  {
+    icon: MdPhone,
+    title: "Phone",
+    value: contactInfo.phone,
+    href: `tel:${contactInfo.phone.replace(/\s/g, "")}`,
+    iconBg: "bg-emerald-50 text-emerald-500 dark:bg-emerald-500/10 dark:text-emerald-400",
+  },
+  {
+    icon: MdLocationOn,
+    title: "Location",
+    value: contactInfo.location,
+    iconBg: "bg-sky-50 text-sky-500 dark:bg-sky-500/10 dark:text-sky-400",
+  },
+];
+
+const socialLinks = [
+  {
+    icon: FaGithub,
+    url: "https://github.com/",
+    label: "GitHub",
+  },
+  {
+    icon: FaLinkedinIn,
+    url: "https://www.linkedin.com/in/abhishek7631/",
+    label: "LinkedIn",
+  },
+];
+
+const inputClass =
+  "w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40 focus:border-sky-400 transition";
 
 function Contact() {
   const {
@@ -21,43 +68,23 @@ function Contact() {
     const userInfo = {
       name: data.name,
       email: data.email,
+      subject: data.subject,
       message: data.message,
     };
+
     try {
       const res = await axios.post("/api/contact", userInfo);
-      if (res.data && res.data.ok) {
+      if (res.data?.ok) {
         toast.success("Your message has been sent successfully!");
         reset();
       } else {
-        console.error("Mail endpoint response:", res.data);
         toast.error("Failed to send message. Please try again.");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Failed to send message. Please try again.");
     }
   };
-
-  const contactMethods = [
-    {
-      icon: MdEmail,
-      title: "Email",
-      value: "abhishek.choudhary7631@gmail.com",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: MdPhone,
-      title: "Phone",
-      value: "+91 9576134807",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: MdLocationOn,
-      title: "Location",
-      value: "New Delhi, India",
-      color: "from-red-500 to-orange-500",
-    },
-  ];
 
   return (
     <motion.section
@@ -66,151 +93,200 @@ function Contact() {
       initial={{ opacity: 0 }}
       animate={visible ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.8 }}
-      className="py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 dark:from-slate-950 dark:via-pink-900/10 dark:to-slate-950 relative"
+      className="py-20 relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
     >
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl"
-          animate={{ y: [0, 40, 0], x: [0, 30, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
-          animate={{ y: [0, -40, 0], x: [0, -30, 0] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-      </div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 right-0 h-72 w-72 rounded-full bg-violet-400/10 blur-3xl dark:bg-violet-500/10"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-sky-400/10 blur-3xl dark:bg-sky-500/10"
+      />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
+      <div className="relative z-10 max-w-6xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-pink-300 to-blue-300 bg-clip-text text-transparent"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-14"
         >
-          Get In Touch
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-center text-gray-400 dark:text-gray-400 mb-12 text-lg"
-        >
-          Let's connect and build something amazing together!
-        </motion.p>
+          <h2 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100">
+            Get In{" "}
+            <span className="bg-gradient-to-r from-sky-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+              Touch
+            </span>
+          </h2>
+          <p className="mt-4 text-sm sm:text-base text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Have a project in mind or want to collaborate? I&apos;d love to hear
+            from you. Let&apos;s create something amazing together!
+          </p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Contact Info */}
+        <div className="grid lg:grid-cols-2 gap-10 items-start">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             animate={visible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6"
+            transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <h3 className="text-2xl font-bold text-purple-300 dark:text-purple-200 mb-6">
-              Contact Information
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+              Let&apos;s Connect
             </h3>
-            {contactMethods.map((method, index) => {
-              const Icon = method.icon;
-              return (
-                <motion.div
-                  key={index}
-                  whileHover={{ x: 10 }}
-                  className="flex items-center gap-4 p-4 rounded-lg border border-slate-700/50 bg-slate-900/30 hover:bg-slate-800/50 transition-all duration-300"
-                >
-                  <div
-                    className={`p-3 rounded-full bg-gradient-to-r ${method.color}`}
-                  >
-                    <Icon size={24} className="text-white" />
+            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+              I&apos;m always open to discussing new projects, creative ideas, or
+              opportunities to be part of your vision. Feel free to reach out
+              through any of the channels below.
+            </p>
+
+            <div className="space-y-4">
+              {contactMethods.map((method) => {
+                const Icon = method.icon;
+                const content = (
+                  <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-gray-200/80 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div
+                      className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${method.iconBg}`}
+                    >
+                      <Icon size={22} />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {method.title}
+                      </p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 break-all">
+                        {method.value}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-gray-400 dark:text-gray-400 text-sm">
-                      {method.title}
-                    </p>
-                    <p className="text-gray-200 dark:text-gray-100 font-semibold">
-                      {method.value}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
+                );
+
+                return method.href ? (
+                  <a key={method.title} href={method.href} className="block">
+                    {content}
+                  </a>
+                ) : (
+                  <div key={method.title}>{content}</div>
+                );
+              })}
+            </div>
+
+            <div className="mt-8">
+              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                Follow Me
+              </p>
+              <div className="flex gap-3">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-300 dark:hover:border-sky-600 shadow-sm transition-colors duration-300"
+                    >
+                      <Icon size={18} />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.form
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             animate={visible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4 bg-gradient-to-br from-slate-900/50 to-slate-900/80 dark:from-slate-900/60 dark:to-slate-900/40 backdrop-blur-md border border-purple-500/20 dark:border-purple-600/30 p-8 rounded-2xl shadow-2xl"
+            className="rounded-2xl bg-white dark:bg-slate-900/80 border border-gray-200/80 dark:border-slate-700/50 shadow-md p-6 sm:p-8"
           >
-            <div>
-              <label className="block text-gray-300 dark:text-gray-200 text-sm font-semibold mb-2">
-                Name
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+              Send Message
+            </h3>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  className={inputClass}
+                  {...register("name", { required: "Name is required" })}
+                />
+                {errors.name && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.name.message}
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className={inputClass}
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.email.message}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Subject
               </label>
-              <motion.input
-                whileFocus={{ scale: 1.02 }}
+              <input
                 type="text"
-                placeholder="Your name"
-                className="w-full px-4 py-3 bg-slate-800/50 dark:bg-slate-800/70 text-gray-100 dark:text-gray-100 border border-slate-700/50 dark:border-slate-700/60 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
-                {...register("name", { required: "Name is required" })}
+                placeholder="Project inquiry"
+                className={inputClass}
+                {...register("subject", { required: "Subject is required" })}
               />
-              {errors.name && (
-                <span className="text-red-400 text-sm mt-1 block">
-                  {errors.name.message}
+              {errors.subject && (
+                <span className="text-red-500 text-xs mt-1 block">
+                  {errors.subject.message}
                 </span>
               )}
             </div>
 
-            <div>
-              <label className="block text-gray-300 dark:text-gray-200 text-sm font-semibold mb-2">
-                Email
-              </label>
-              <motion.input
-                whileFocus={{ scale: 1.02 }}
-                type="email"
-                placeholder="Your email"
-                className="w-full px-4 py-3 bg-slate-800/50 dark:bg-slate-800/70 text-gray-100 dark:text-gray-100 border border-slate-700/50 dark:border-slate-700/60 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address",
-                  },
-                })}
-              />
-              {errors.email && (
-                <span className="text-red-400 text-sm mt-1 block">
-                  {errors.email.message}
-                </span>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-gray-300 dark:text-gray-200 text-sm font-semibold mb-2">
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Message
               </label>
-              <motion.textarea
-                whileFocus={{ scale: 1.02 }}
-                placeholder="Your message"
-                className="w-full px-4 py-3 bg-slate-800/50 dark:bg-slate-800/70 text-gray-100 dark:text-gray-100 border border-slate-700/50 dark:border-slate-700/60 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition resize-none"
-                rows="4"
+              <textarea
+                placeholder="Tell me about your project..."
+                rows="5"
+                className={`${inputClass} resize-none`}
                 {...register("message", { required: "Message is required" })}
               />
               {errors.message && (
-                <span className="text-red-400 text-sm mt-1 block">
+                <span className="text-red-500 text-xs mt-1 block">
                   {errors.message.message}
                 </span>
               )}
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/50"
+              className="w-full mt-6 flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3.5 rounded-xl transition-colors duration-300 shadow-md shadow-sky-500/25"
             >
+              <FaPaperPlane size={16} />
               Send Message
             </motion.button>
           </motion.form>

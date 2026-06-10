@@ -1,107 +1,127 @@
 import React from "react";
-import { motion } from "framer-motion";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa6";
+import { Link } from "react-scroll";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+
+const quickLinks = [
+  { id: "home", text: "Home" },
+  { id: "about", text: "About" },
+  { id: "technical-expertise", text: "Skills" },
+  { id: "experience", text: "Experience" },
+  { id: "projects", text: "Projects" },
+  { id: "contact", text: "Contact" },
+];
+
+const contactInfo = {
+  email: "abhishek.choudhary7631@gmail.com",
+  phone: "+91 9576134807",
+  location: "Gurgaon, India",
+};
+
+const socialLinks = [
+  {
+    icon: FaGithub,
+    url: "https://github.com/",
+    label: "GitHub",
+  },
+  {
+    icon: FaLinkedinIn,
+    url: "https://www.linkedin.com/in/abhishek7631/",
+    label: "LinkedIn",
+  },
+];
 
 function Footer() {
-  const socialLinks = [
-    {
-      icon: FaFacebook,
-      url: "#",
-      label: "Facebook",
-      color: "hover:text-blue-500",
-    },
-    {
-      icon: FaTwitter,
-      url: "#",
-      label: "Twitter",
-      color: "hover:text-sky-400",
-    },
-    {
-      icon: FaInstagram,
-      url: "#",
-      label: "Instagram",
-      color: "hover:text-pink-500",
-    },
-    {
-      icon: FaLinkedinIn,
-      url: "https://www.linkedin.com/in/abhishek7631/",
-      label: "LinkedIn",
-      color: "hover:text-blue-400",
-    },
-  ];
-
   return (
-    <motion.footer
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="py-12 bg-gradient-to-r from-slate-950 via-purple-900/20 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 border-t border-purple-500/20 dark:border-purple-600/20"
-    >
-      <div className="max-w-screen-2xl container mx-auto px-4 md:px-20">
-        <div className="flex flex-col items-center justify-center space-y-6">
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex gap-6"
-          >
-            {socialLinks.map((social, index) => {
-              const Icon = social.icon;
-              return (
-                <motion.a
-                  key={index}
-                  whileHover={{ scale: 1.2, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={social.url}
-                  aria-label={social.label}
-                  className={`text-gray-400 dark:text-gray-400 text-2xl transition-all duration-300 ${social.color}`}
+    <footer className="bg-slate-950 text-gray-300 border-t border-slate-800">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div>
+            <h3 className="text-xl font-bold">
+              <span className="text-sky-400">Abhishek</span>{" "}
+              <span className="text-violet-400">Choudhary</span>
+            </h3>
+            <p className="mt-4 text-sm text-gray-400 leading-relaxed">
+              MERN Stack Software Engineer passionate about building scalable,
+              user-friendly web applications with modern technologies and clean
+              code practices.
+            </p>
+            <div className="flex gap-3 mt-5">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-10 h-10 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-gray-400 hover:text-sky-400 hover:border-sky-500/50 transition-colors duration-300"
+                  >
+                    <Icon size={18} />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-base font-bold text-white mb-4">Quick Links</h4>
+            <ul className="space-y-2.5">
+              {quickLinks.map((link) => (
+                <li key={link.id}>
+                  <Link
+                    to={link.id}
+                    smooth
+                    duration={500}
+                    offset={-80}
+                    className="text-sm text-gray-400 hover:text-sky-400 cursor-pointer transition-colors duration-300"
+                  >
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-base font-bold text-white mb-4">Contact Info</h4>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3 text-sm text-gray-400">
+                <MdEmail className="text-sky-400 mt-0.5 shrink-0" size={18} />
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="hover:text-sky-400 transition-colors break-all"
                 >
-                  <Icon />
-                </motion.a>
-              );
-            })}
-          </motion.div>
+                  {contactInfo.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-3 text-sm text-gray-400">
+                <MdPhone className="text-sky-400 mt-0.5 shrink-0" size={18} />
+                <a
+                  href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+                  className="hover:text-sky-400 transition-colors"
+                >
+                  {contactInfo.phone}
+                </a>
+              </li>
+              <li className="flex items-start gap-3 text-sm text-gray-400">
+                <MdLocationOn className="text-sky-400 mt-0.5 shrink-0" size={18} />
+                <span>{contactInfo.location}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-          {/* Copyright */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-500 dark:text-gray-400 text-center text-sm"
-          >
-            <span className="font-semibold text-purple-300 dark:text-purple-200">
-              Abhishek Choudhary
-            </span>{" "}
-            &copy; {new Date().getFullYear()}. All rights reserved. | MERN Stack
-            Developer
-          </motion.p>
-
-          {/* Divider */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
-          />
-
-          {/* Built with */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xs text-gray-500 dark:text-gray-500"
-          >
-            Built with React, Framer Motion & Tailwind CSS
-          </motion.p>
+        <div className="mt-10 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-gray-500">
+          <p>
+            &copy; {new Date().getFullYear()} Abhishek Choudhary. Made with{" "}
+            <span className="text-red-400">♥</span> and React
+          </p>
+          <p>Built with MERN Stack</p>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }
 
